@@ -21,7 +21,7 @@
           Helper
         </span>
       </h1>
-      <p class="mt-2 text-soft-ink/70 font-body text-lg">
+      <p class="mt-5 text-soft-ink/70 font-body text-lg">
         Berhenti mikir, mulai milih. 🫵
       </p>
     </header>
