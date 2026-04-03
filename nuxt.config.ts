@@ -2,6 +2,17 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+  app: {
+    head: {
+      title: "Gimana Enaknya - Biar gak overthinking, tinggal pilih aja!",
+      meta: [
+        {
+          name: "description",
+          content: "Biar gak overthinking, tinggal pilih aja!",
+        },
+      ],
+    },
+  },
   modules: ["@nuxtjs/tailwindcss"],
   tailwindcss: {
     cssPath: "~/assets/css/tailwind.css",
