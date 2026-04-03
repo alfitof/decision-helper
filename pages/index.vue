@@ -1,5 +1,5 @@
 <template>
-  <div class="relative z-10 min-h-screen py-8 px-4 max-w-2xl mx-auto">
+  <div class="relative z-10 min-h-screen py-8 px-4 max-w-[43rem] mx-auto">
     <!-- Header -->
     <header class="text-center mb-6 animate-fade-up">
       <div class="flex items-center justify-center gap-2 mb-2">
@@ -11,14 +11,14 @@
         >
       </div>
       <h1
-        class="font-display text-5xl font-black tracking-tight text-ink leading-none"
+        class="font-display text-4xl sm:text-5xl font-black tracking-tight text-ink leading-none"
       >
-        Decision
+        Gimana
         <span
           class="relative inline-block text-coral"
           style="text-decoration: underline wavy #ff6b6b"
         >
-          Helper
+          Enaknya
         </span>
       </h1>
       <p class="mt-6 text-soft-ink/70 font-body text-lg">
