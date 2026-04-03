@@ -1,7 +1,7 @@
 <template>
   <div class="relative z-10 min-h-screen py-8 px-4 max-w-2xl mx-auto">
     <!-- Header -->
-    <header class="text-center mb-10 animate-fade-up">
+    <header class="text-center mb-6 animate-fade-up">
       <div class="flex items-center justify-center gap-2 mb-2">
         <span class="text-3xl animate-wiggle inline-block">🧠</span>
         <span
@@ -21,7 +21,7 @@
           Helper
         </span>
       </h1>
-      <p class="mt-5 text-soft-ink/70 font-body text-lg">
+      <p class="mt-6 text-soft-ink/70 font-body text-lg">
         Berhenti mikir, mulai milih. 🫵
       </p>
     </header>
