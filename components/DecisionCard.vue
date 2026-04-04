@@ -4,7 +4,7 @@
     <Transition name="toast">
       <div
         v-if="showToast"
-        class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-ink text-cream px-5 py-3 rounded-2xl border-2 border-lemon card-shadow font-display font-bold text-sm shadow-xl"
+        class="fixed bottom-[-4.2rem] left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-ink text-cream px-5 py-3 rounded-2xl border-2 border-lemon card-shadow font-display font-bold text-sm shadow-xl"
       >
         <span class="text-lg">📌</span>
         Keputusan tersimpan ke history!
@@ -321,20 +321,21 @@ const saveDecision = () => {
 }
 
 /* Toast animation */
-.toast-enter-active {
-  animation: slide-down 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.toast-leave-active {
-  animation: slide-down 0.2s reverse ease;
-}
-@keyframes slide-down {
+@keyframes slide-up {
   from {
     opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
+    transform: translateX(-50%) translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
+}
+
+.toast-enter-active {
+  animation: slide-up 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.toast-leave-active {
+  animation: slide-up 0.2s reverse ease;
 }
 </style>
