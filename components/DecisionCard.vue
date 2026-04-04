@@ -1,5 +1,16 @@
 <template>
   <div class="space-y-4 animate-fade-up">
+    <!-- Toast -->
+    <Transition name="toast">
+      <div
+        v-if="showToast"
+        class="fixed top-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-ink text-cream px-5 py-3 rounded-2xl border-2 border-lemon card-shadow font-display font-bold text-sm shadow-xl"
+      >
+        <span class="text-lg">📌</span>
+        Keputusan tersimpan ke history!
+      </div>
+    </Transition>
+
     <!-- Input Section -->
     <div class="bg-white rounded-3xl p-6 border-2 border-ink card-shadow">
       <h2
@@ -59,7 +70,7 @@
         </div>
       </div>
 
-      <!-- Context (optional) -->
+      <!-- Context -->
       <div class="mb-4">
         <label
           class="font-display font-bold text-sm text-ink/60 uppercase tracking-wider mb-1 block"
@@ -98,13 +109,12 @@
           </svg>
           AI lagi mikir<span class="typing-dots"></span>
         </span>
-        <span v-else class="flex items-center gap-2">
-          ✨ Analisis dengan AI
-        </span>
+        <span v-else>✨ Analisis dengan AI</span>
       </button>
     </div>
 
     <!-- AI Result Section -->
+    <!-- ✅ FIX: Pakai snapshot (snapshotA/B), bukan optionA/B langsung -->
     <Transition name="pop">
       <div v-if="result" class="space-y-3">
         <!-- Recommendation Banner -->
@@ -121,14 +131,14 @@
             <span class="text-2xl">🏆</span>
           </div>
           <p class="text-2xl font-black">
-            {{ result.winner === "A" ? optionA : optionB }}
+            {{ result.winner === "A" ? snapshotA : snapshotB }}
           </p>
           <p class="text-sm mt-1 opacity-90">{{ result.summary }}</p>
         </div>
 
         <!-- Pro/Cons Grid -->
         <div class="grid grid-cols-2 gap-3">
-          <!-- Option A pros/cons -->
+          <!-- Option A -->
           <div class="bg-white rounded-2xl p-4 border-2 border-ink card-shadow">
             <div class="flex items-center gap-1.5 mb-3">
               <span
@@ -136,7 +146,7 @@
                 >A</span
               >
               <span class="font-display font-bold text-sm truncate">{{
-                optionA
+                snapshotA
               }}</span>
             </div>
             <div class="space-y-1.5">
@@ -159,7 +169,7 @@
             </div>
           </div>
 
-          <!-- Option B pros/cons -->
+          <!-- Option B -->
           <div class="bg-white rounded-2xl p-4 border-2 border-ink card-shadow">
             <div class="flex items-center gap-1.5 mb-3">
               <span
@@ -167,7 +177,7 @@
                 >B</span
               >
               <span class="font-display font-bold text-sm truncate">{{
-                optionB
+                snapshotB
               }}</span>
             </div>
             <div class="space-y-1.5">
@@ -230,15 +240,29 @@ const emit = defineEmits(["decision-saved"]);
 const optionA = ref("");
 const optionB = ref("");
 const context = ref("");
+
+// ✅ FIX #2: Snapshot nilai saat tombol Analisis ditekan
+// Nilai ini tidak akan berubah walau input diubah setelahnya
+const snapshotA = ref("");
+const snapshotB = ref("");
+
 const isLoading = ref(false);
 const result = ref<any>(null);
 const errorMsg = ref("");
+
+// ✅ FIX #1: Toast state
+const showToast = ref(false);
+let toastTimer: ReturnType<typeof setTimeout> | null = null;
 
 const analyzeWithAI = async () => {
   if (!optionA.value || !optionB.value) return;
   isLoading.value = true;
   errorMsg.value = "";
   result.value = null;
+
+  // Snapshot nilai input SEBELUM fetch — ini kuncinya
+  snapshotA.value = optionA.value;
+  snapshotB.value = optionB.value;
 
   try {
     const res = await $fetch("/api/analyze", {
@@ -252,7 +276,7 @@ const analyzeWithAI = async () => {
     result.value = res;
   } catch (e: any) {
     errorMsg.value =
-      e?.data?.message || "Gagal koneksi ke AI. Cek API key kamu ya!";
+      e?.data?.message || "Gagal koneksi ke n8n. Cek webhook URL!";
   } finally {
     isLoading.value = false;
   }
@@ -260,13 +284,21 @@ const analyzeWithAI = async () => {
 
 const saveDecision = () => {
   if (!result.value) return;
+
   emit("decision-saved", {
-    optionA: optionA.value,
-    optionB: optionB.value,
+    optionA: snapshotA.value,
+    optionB: snapshotB.value,
     context: context.value,
     winner: result.value.winner,
     summary: result.value.summary,
   });
+
+  // ✅ FIX #1: Tampilkan toast
+  showToast.value = true;
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    showToast.value = false;
+  }, 2500);
 };
 </script>
 
@@ -285,6 +317,24 @@ const saveDecision = () => {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* Toast animation */
+.toast-enter-active {
+  animation: slide-down 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.toast-leave-active {
+  animation: slide-down 0.2s reverse ease;
+}
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 }
 </style>
