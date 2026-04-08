@@ -84,7 +84,6 @@ const tabs = [
   { id: "history", icon: "📖", label: "History" },
 ];
 
-// History management
 const history = ref<any[]>([]);
 
 onMounted(() => {

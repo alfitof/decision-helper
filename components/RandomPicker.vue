@@ -125,7 +125,6 @@ const spin = async () => {
   isSpinning.value = true;
   winner.value = "";
 
-  // Fake suspense 😂
   await new Promise((r) => setTimeout(r, 1500));
   winner.value = valid[Math.floor(Math.random() * valid.length)];
   isSpinning.value = false;

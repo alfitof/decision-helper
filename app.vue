@@ -115,12 +115,10 @@ const loadingMessages = [
 let msgInterval: ReturnType<typeof setInterval>;
 
 onMounted(() => {
-  // Rotate pesan loading tiap 600ms
   msgInterval = setInterval(() => {
     currentMsg.value = (currentMsg.value + 1) % loadingMessages.length;
   }, 700);
 
-  // Hilangkan loading setelah fonts & assets siap (min 2 detik biar keliatan 😂)
   const minWait = new Promise((r) => setTimeout(r, 2000));
   const fontReady = document.fonts.ready;
 

@@ -241,8 +241,6 @@ const optionA = ref("");
 const optionB = ref("");
 const context = ref("");
 
-// ✅ FIX #2: Snapshot nilai saat tombol Analisis ditekan
-// Nilai ini tidak akan berubah walau input diubah setelahnya
 const snapshotA = ref("");
 const snapshotB = ref("");
 
@@ -250,7 +248,6 @@ const isLoading = ref(false);
 const result = ref<any>(null);
 const errorMsg = ref("");
 
-// ✅ FIX #1: Toast state
 const showToast = ref(false);
 let toastTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -260,7 +257,6 @@ const analyzeWithAI = async () => {
   errorMsg.value = "";
   result.value = null;
 
-  // Snapshot nilai input SEBELUM fetch — ini kuncinya
   snapshotA.value = optionA.value;
   snapshotB.value = optionB.value;
 
@@ -293,7 +289,6 @@ const saveDecision = () => {
     summary: result.value.summary,
   });
 
-  // ✅ FIX #1: Tampilkan toast
   showToast.value = true;
   if (toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
