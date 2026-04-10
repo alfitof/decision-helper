@@ -1,6 +1,5 @@
 <template>
   <div class="space-y-4 animate-fade-up">
-    <!-- Toast -->
     <Transition name="toast">
       <div
         v-if="showToast"
@@ -11,7 +10,6 @@
       </div>
     </Transition>
 
-    <!-- Input Section -->
     <div class="bg-white rounded-3xl p-6 border-2 border-ink card-shadow">
       <h2
         class="font-display text-xl font-bold text-ink mb-4 flex items-center gap-2"
@@ -23,7 +21,6 @@
         Masukkan pilihanmu
       </h2>
 
-      <!-- Option A -->
       <div class="mb-3">
         <label
           class="font-display font-bold text-sm text-ink/60 uppercase tracking-wider mb-1 block"
@@ -43,14 +40,12 @@
         </div>
       </div>
 
-      <!-- VS Divider -->
       <div class="flex items-center gap-2 my-3">
         <div class="flex-1 h-px bg-ink/10"></div>
         <span class="font-display font-black text-ink/20 text-lg">VS</span>
         <div class="flex-1 h-px bg-ink/10"></div>
       </div>
 
-      <!-- Option B -->
       <div class="mb-4">
         <label
           class="font-display font-bold text-sm text-ink/60 uppercase tracking-wider mb-1 block"
@@ -70,7 +65,6 @@
         </div>
       </div>
 
-      <!-- Context -->
       <div class="mb-4">
         <label
           class="font-display font-bold text-sm text-ink/60 uppercase tracking-wider mb-1 block"
@@ -85,7 +79,6 @@
         ></textarea>
       </div>
 
-      <!-- Analyze Button -->
       <button
         @click="analyzeWithAI"
         :disabled="!optionA || !optionB || isLoading"
@@ -113,11 +106,8 @@
       </button>
     </div>
 
-    <!-- AI Result Section -->
-    <!-- ✅ FIX: Pakai snapshot (snapshotA/B), bukan optionA/B langsung -->
     <Transition name="pop">
       <div v-if="result" class="space-y-3">
-        <!-- Recommendation Banner -->
         <div
           class="rounded-3xl p-5 border-2 border-ink text-white font-display"
           :class="
@@ -136,9 +126,7 @@
           <p class="text-sm mt-1 opacity-90">{{ result.summary }}</p>
         </div>
 
-        <!-- Pro/Cons Grid -->
         <div class="grid grid-cols-2 gap-3">
-          <!-- Option A -->
           <div class="bg-white rounded-2xl p-4 border-2 border-ink card-shadow">
             <div class="flex items-center gap-1.5 mb-3">
               <span
@@ -169,7 +157,6 @@
             </div>
           </div>
 
-          <!-- Option B -->
           <div class="bg-white rounded-2xl p-4 border-2 border-ink card-shadow">
             <div class="flex items-center gap-1.5 mb-3">
               <span
@@ -201,7 +188,6 @@
           </div>
         </div>
 
-        <!-- AI Insight -->
         <div
           class="bg-white rounded-2xl p-4 border-2 border-grape card-shadow-grape"
         >
@@ -214,7 +200,6 @@
           </p>
         </div>
 
-        <!-- Save Button -->
         <button
           @click="saveDecision"
           class="btn-bounce w-full py-3 bg-lemon text-ink font-display font-bold rounded-xl border-2 border-ink card-shadow hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all flex items-center justify-center gap-2"
@@ -224,7 +209,6 @@
       </div>
     </Transition>
 
-    <!-- Error State -->
     <div
       v-if="errorMsg"
       class="bg-red-50 border-2 border-red-300 rounded-2xl p-4 text-sm text-red-600 font-body"

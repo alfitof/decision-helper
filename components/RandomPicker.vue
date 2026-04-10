@@ -10,7 +10,6 @@
         Kalau udah stuck banget, biar semesta yang milih 🌌
       </p>
 
-      <!-- Input Options -->
       <div class="space-y-2 mb-4">
         <label
           class="font-display font-bold text-sm text-ink/60 uppercase tracking-wider block"
@@ -32,7 +31,6 @@
         </div>
       </div>
 
-      <!-- Add Option -->
       <button
         v-if="options.length < 6"
         @click="addOption"
@@ -41,7 +39,6 @@
         + Tambah pilihan
       </button>
 
-      <!-- Spin Button -->
       <button
         @click="spin"
         :disabled="!hasValidOptions || isSpinning"
@@ -57,13 +54,11 @@
       </button>
     </div>
 
-    <!-- Result -->
     <Transition name="pop">
       <div
         v-if="winner"
         class="bg-ink rounded-3xl p-6 border-2 border-ink text-center relative overflow-hidden"
       >
-        <!-- Confetti-like dots -->
         <div class="absolute inset-0 pointer-events-none">
           <span
             v-for="n in 8"

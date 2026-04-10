@@ -1,6 +1,5 @@
 <template>
   <div class="animate-fade-up">
-    <!-- Empty State -->
     <div
       v-if="!history.length"
       class="text-center py-16 bg-white rounded-3xl border-2 border-dashed border-ink/20"
@@ -13,7 +12,6 @@
     </div>
 
     <div v-else>
-      <!-- Header -->
       <div class="flex items-center justify-between mb-4">
         <p class="font-display font-bold text-ink/50 text-sm">
           {{ history.length }} keputusan tersimpan
@@ -26,7 +24,6 @@
         </button>
       </div>
 
-      <!-- History List -->
       <div class="space-y-3">
         <div
           v-for="(item, i) in history"
@@ -36,7 +33,6 @@
         >
           <div class="flex items-start justify-between gap-2">
             <div class="flex-1 min-w-0">
-              <!-- Winner badge -->
               <div class="flex items-center gap-2 mb-2">
                 <span
                   class="tag text-white"
@@ -49,7 +45,6 @@
                 </span>
               </div>
 
-              <!-- Options -->
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span
                   class="text-xs font-body text-ink/60 truncate max-w-[100px]"
@@ -62,7 +57,6 @@
                 >
               </div>
 
-              <!-- Summary -->
               <p
                 v-if="item.summary"
                 class="text-xs text-ink/40 font-body mt-1.5 italic line-clamp-2"
@@ -71,7 +65,6 @@
               </p>
             </div>
 
-            <!-- Delete btn -->
             <button
               @click="$emit('delete', item.id)"
               class="shrink-0 w-7 h-7 rounded-lg bg-ink/5 hover:bg-red-50 text-ink/30 hover:text-red-400 transition-colors flex items-center justify-center text-xs"

@@ -1,6 +1,5 @@
 <template>
   <div class="relative z-10 min-h-screen py-8 px-4 max-w-[43rem] mx-auto">
-    <!-- Header -->
     <header class="text-center mb-6 animate-fade-up">
       <div class="flex items-center justify-center gap-2 mb-2">
         <span class="text-3xl animate-wiggle inline-block">🧠</span>
@@ -26,7 +25,6 @@
       </p>
     </header>
 
-    <!-- Tab Navigation -->
     <div
       class="flex gap-2 mb-6 bg-ink/5 p-1.5 rounded-2xl border border-ink/10"
     >
@@ -46,19 +44,15 @@
       </button>
     </div>
 
-    <!-- Tab Content -->
     <Transition name="slide-fade" mode="out-in">
-      <!-- COMPARE TAB -->
       <div v-if="activeTab === 'compare'" key="compare">
         <DecisionCard @decision-saved="saveToHistory" />
       </div>
 
-      <!-- RANDOM TAB -->
       <div v-else-if="activeTab === 'random'" key="random">
         <RandomPicker />
       </div>
 
-      <!-- HISTORY TAB -->
       <div v-else-if="activeTab === 'history'" key="history">
         <HistoryPanel
           :history="history"
@@ -68,7 +62,6 @@
       </div>
     </Transition>
 
-    <!-- Footer -->
     <footer class="text-center mt-12 text-ink/30 font-mono text-xs">
       <p>made with ☕ & existential dread</p>
     </footer>
