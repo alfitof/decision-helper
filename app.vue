@@ -134,7 +134,6 @@ onUnmounted(() => {
 </script>
 
 <style>
-/* Loading transition — fade + scale keluar */
 .loading-fade-leave-active {
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -142,8 +141,6 @@ onUnmounted(() => {
   opacity: 0;
   transform: scale(1.05);
 }
-
-/* Pesan loading swap */
 .msg-swap-enter-active,
 .msg-swap-leave-active {
   transition: all 0.25s ease;

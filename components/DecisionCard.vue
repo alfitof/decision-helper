@@ -298,8 +298,6 @@ const saveDecision = () => {
     transform: scale(1);
   }
 }
-
-/* Toast animation */
 @keyframes slide-up {
   from {
     opacity: 0;
