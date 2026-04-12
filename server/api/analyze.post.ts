@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const { optionA, optionB, context } = body;
+  const { optionA, optionB, context, mood } = body;
 
   if (!optionA || !optionB) {
     throw createError({ statusCode: 400, message: "Opsi A dan B wajib diisi" });
@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
         "Content-Type": "application/json",
         "x-api-key": config.n8nApiSecret,
       },
-      body: { optionA, optionB, context: context || "" },
+      body: { optionA, optionB, context: context, mood: mood || "calm" || "" },
     });
 
     const parsed =
