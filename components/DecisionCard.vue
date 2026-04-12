@@ -9,7 +9,6 @@
         Keputusan tersimpan ke history!
       </div>
     </Transition>
-
     <div class="bg-white rounded-3xl p-6 border-2 border-ink card-shadow">
       <h2
         class="font-display text-xl font-bold text-ink mb-4 flex items-center gap-2"
@@ -21,6 +20,7 @@
         Masukkan pilihanmu
       </h2>
 
+      <MoodCheck @mood-selected="onMoodSelected" />
       <div class="mb-3">
         <label
           class="font-display font-bold text-sm text-ink/60 uppercase tracking-wider mb-1 block"
@@ -232,6 +232,11 @@ const isLoading = ref(false);
 const result = ref<any>(null);
 const errorMsg = ref("");
 
+const selectedMood = ref<any>(null);
+const onMoodSelected = (mood: any) => {
+  selectedMood.value = mood;
+};
+
 const showToast = ref(false);
 let toastTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -251,6 +256,7 @@ const analyzeWithAI = async () => {
         optionA: optionA.value,
         optionB: optionB.value,
         context: context.value,
+        mood: selectedMood.value?.id || null,
       },
     });
     result.value = res;
