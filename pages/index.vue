@@ -48,7 +48,9 @@
       <div v-if="activeTab === 'compare'" key="compare">
         <DecisionCard @decision-saved="saveToHistory" />
       </div>
-
+      <div v-else-if="activeTab === 'matrix'" key="matrix">
+        <PriorityMatrix />
+      </div>
       <div v-else-if="activeTab === 'random'" key="random">
         <RandomPicker />
       </div>
@@ -73,6 +75,7 @@ const activeTab = ref("compare");
 
 const tabs = [
   { id: "compare", icon: "⚡", label: "Compare" },
+  { id: "matrix", icon: "📊", label: "Matrix" },
   { id: "random", icon: "🎲", label: "Random" },
   { id: "history", icon: "📖", label: "History" },
 ];
