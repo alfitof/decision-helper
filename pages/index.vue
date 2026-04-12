@@ -63,10 +63,6 @@
         />
       </div>
     </Transition>
-
-    <footer class="text-center mt-12 text-ink/30 font-mono text-xs">
-      <p>made with ☕ & existential dread</p>
-    </footer>
   </div>
 </template>
 
