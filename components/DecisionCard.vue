@@ -9,6 +9,7 @@
         Keputusan tersimpan ke history!
       </div>
     </Transition>
+    <MoodCheck @mood-selected="onMoodSelected" />
     <div class="bg-white rounded-3xl p-6 border-2 border-ink card-shadow">
       <h2
         class="font-display text-xl font-bold text-ink mb-4 flex items-center gap-2"
@@ -20,7 +21,6 @@
         Masukkan pilihanmu
       </h2>
 
-      <MoodCheck @mood-selected="onMoodSelected" />
       <div class="mb-3">
         <label
           class="font-display font-bold text-sm text-ink/60 uppercase tracking-wider mb-1 block"
